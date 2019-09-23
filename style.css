@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box
+};
+
+#top {
+  
+}
+
+.row {
+  padding: 10px 0 10px 0;
+}
+
+#start-card {
+  display: flex;
+}
+
+#quiz-card {
+  display: none;
+}
+#final-card {
+  display: none;
+}
