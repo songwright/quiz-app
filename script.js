@@ -1,11 +1,15 @@
 let startButton = document.querySelector("#start-quiz-btn");
 let startCard = document.querySelector("#start-card");
 let quizCard = document.querySelector("#quiz-card");
+let questionTitle = document.querySelector("#title");
+let choiceList = document.querySelector(".list-group");
+let quizMessage = document.querySelector("#quiz-message");
 
 startButton.addEventListener('click', function (event) {
   event.preventDefault();
   quizCard.setAttribute("style", "display: flex")
   startCard.setAttribute("style", "display: none")
+  renderQuestion();
 });
 
 let questions = [
@@ -21,6 +25,33 @@ let questions = [
   }
   ///etc.
 ];
+
+let questionNum = 0;
+
+function renderQuestion() {
+  choiceList.innerHTML = '';
+  questionTitle.textContent = questions[questionNum].title;
+
+  for (i = 0; i < questions[questionNum].choices.length; i++) {
+    let li = document.createElement("li");
+    li.textContent = questions[questionNum].choices[i];
+    li.setAttribute("class", "list-group-item");
+    choiceList.appendChild(li);
+
+    li.addEventListener("click", function(event) {
+      let choice = event.target;
+
+        if (choice.innerHTML === questions[questionNum].answer) {
+          questionNum++;
+          if (questionNum < questions.length) {
+            renderQuestion();
+          } else {
+            window.open("highscores.html","_self");
+          }
+        }
+    });
+  }
+}
 
 // Timer functions based on a timer by Daniel Hug https://jsfiddle.net/Daniel_Hug/pvk6p/
 // function tick() {
