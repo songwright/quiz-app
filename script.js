@@ -26,6 +26,7 @@ let questions = [
   ///etc.
 ];
 
+let score = 0;
 let questionNum = 0;
 
 function renderQuestion() {
@@ -35,7 +36,7 @@ function renderQuestion() {
   for (i = 0; i < questions[questionNum].choices.length; i++) {
     let li = document.createElement("li");
     li.textContent = questions[questionNum].choices[i];
-    li.setAttribute("class", "list-group-item");
+    // li.setAttribute("class", "list-group-item");
     choiceList.appendChild(li);
 
     li.addEventListener("click", function(event) {
@@ -43,14 +44,19 @@ function renderQuestion() {
 
         if (choice.innerHTML === questions[questionNum].answer) {
           questionNum++;
-          if (questionNum < questions.length) {
-            renderQuestion();
-          } else {
-            window.open("highscores.html","_self");
-          }
+          console.log("questionNum = " + questionNum);
+          renderQuestion();
+        } else if (choice !== questions[questionNum].answer) {
+          takeScore();
         }
     });
   }
+}
+
+function takeScore() {
+  score = score - 10;
+  console.log(score);
+  // window.open("highscores.html","_self");
 }
 
 // Timer functions based on a timer by Daniel Hug https://jsfiddle.net/Daniel_Hug/pvk6p/
