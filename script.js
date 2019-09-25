@@ -6,6 +6,7 @@ let questionTitle = document.querySelector("#title");
 let choiceList = document.querySelector(".list-group");
 let quizMessage = document.querySelector("#quiz-message");
 let clock = document.querySelector("#clock");
+let finalScore = document.querySelector("#final-score");
 let seconds = 75;
 let t =0; // For clearing the clock
 
@@ -44,6 +45,7 @@ function renderQuestion() {
     finalCard.setAttribute("style", "display: flex")
     quizCard.setAttribute("style", "display: none")
     stopClock();
+    finalScore.innerHTML = seconds;
   } else {
     for (let i = 0; i < questions[questionNum].choices.length; i++) {
       let li = document.createElement("li");
