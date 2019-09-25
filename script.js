@@ -2,22 +2,31 @@ let startButton = document.querySelector("#start-quiz-btn");
 let startCard = document.querySelector("#start-card");
 let quizCard = document.querySelector("#quiz-card");
 let finalCard = document.querySelector("#final-card");
+let highScoresCard = document.querySelector("#high-scores-card");
 let questionTitle = document.querySelector("#title");
 let choiceList = document.querySelector(".list-group");
 let quizMessage = document.querySelector("#quiz-message");
 let clock = document.querySelector("#clock");
 let finalScore = document.querySelector("#final-score");
 let highScoreButton = document.querySelector("#high-score");
+let viewHighScoresButton = document.querySelector("#view-high-scores-btn");
 let highScores = [];
 let highScoresList = document.querySelector("#high-scores-list");
 let seconds = 75;
 let t = 0; // For stopping the clock
 
+viewHighScoresButton.addEventListener('click', function(event) {
+  event.preventDefault();
+  quizCard.setAttribute("style", "display: none");
+  startCard.setAttribute("style", "display: none");
+  highScoresCard.setAttribute("style", "display: flex");
+})
 
 startButton.addEventListener('click', function (event) {
   event.preventDefault();
-  quizCard.setAttribute("style", "display: flex")
-  startCard.setAttribute("style", "display: none")
+  quizCard.setAttribute("style", "display: flex");
+  startCard.setAttribute("style", "display: none");
+  highScoresCard.setAttribute("style", "display: none");
   renderQuestion();
   timer();
 });
@@ -109,8 +118,8 @@ highScoreButton.addEventListener("click", function(event) {
 
   // Save initials and high score.
   localStorage.setItem("highScores", JSON.stringify(highScores));
-  window.location.href = "highscores.html";
-  console.log(highScores);
+  highScoresCard.setAttribute("style", "display: flex")
+  finalCard.setAttribute("style", "display: none")
   renderHighScores();
 });
 
@@ -118,6 +127,5 @@ function renderHighScores () {
   let storedHighScores = JSON.parse(localStorage.getItem("highScores"));
 
     highScores = storedHighScores;
-  // console.log(highScores);
-  highScoresList.textContent = highScores;
+    highScoresList.textContent = highScores;
 }
