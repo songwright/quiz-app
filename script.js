@@ -78,9 +78,11 @@ function renderQuestion() {
   
           if (choice.innerHTML === questions[questionNum].answer) {
             questionNum++;
+            quizMessage.innerHTML = "Right!";
             renderQuestion();
           } else if (choice !== questions[questionNum].answer) {
             takeScore();
+            quizMessage.innerHTML = "Wrong";
           }
       });
     }
