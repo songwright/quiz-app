@@ -13,7 +13,7 @@
   <div class="container col-8">
     <div class="row">
       <div id="top" class="col-6">
-        <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href = 'highscores.html';" >View High Scores</button>
+        <button id="view-high-scores-btn" type="button" class="btn btn-primary btn-sm">View High Scores</button>
       </div>
       <div class="col-6 d-flex justify-content-end">
         <div class="timer ">Time: <span id="clock">75</span></div>
@@ -46,6 +46,16 @@
           <form method="post">
             <p>Enter initials here: <input type="text" name="initials" id="initials"><button id="high-score">Submit</button></p>
           </form>
+        </card>
+      </card>
+      <card id="high-scores-card" class="card">
+        <card class="card-body">
+            <h1>List of High Scores</h1>
+            <ol>
+              <li id="high-scores-list"></li>
+            </ol>
+            <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href = 'index.html';" >Start Quiz</button>
+            <button id="clear-high-scores" type="button" class="btn btn-primary btn-sm">Clear High Scores</button>
         </card>
       </card>
   </div>
