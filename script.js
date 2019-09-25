@@ -7,8 +7,10 @@ let choiceList = document.querySelector(".list-group");
 let quizMessage = document.querySelector("#quiz-message");
 let clock = document.querySelector("#clock");
 let finalScore = document.querySelector("#final-score");
+let highScoreButton = document.querySelector("#high-score");
+let highScores = [];
 let seconds = 75;
-let t =0; // For clearing the clock
+let t = 0; // For stopping the clock
 
 
 startButton.addEventListener('click', function (event) {
@@ -70,7 +72,6 @@ function renderQuestion() {
 
 function takeScore() {
   seconds -= 10;
-  // window.open("highscores.html","_self");
 }
 
 // Timer functions based on a timer by Daniel Hug https://jsfiddle.net/Daniel_Hug/pvk6p/
@@ -91,3 +92,23 @@ function timer() {
 function stopClock () {
   clearTimeout(t);
 }
+
+highScoreButton.addEventListener("click", function(event) {
+  event.preventDefault();
+
+  let initials = document.querySelector("#initials").value;
+  let highScore = initials + " - " + seconds;
+
+  if (initials === '') {
+    alert("Input cannot be blank.");
+  }
+
+  // Add high score to array
+  highScores.push(highScore);
+
+  // Save initials and high score.
+  localStorage.setItem("highScores", JSON.stringify(highScores));
+
+  // localStorage.setItem("initials", initials);
+  // localStorage.setItem("score", seconds);
+});
