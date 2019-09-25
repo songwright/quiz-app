@@ -21,11 +21,13 @@ viewHighScoresButton.addEventListener('click', function(event) {
   quizCard.setAttribute("style", "display: none");
   startCard.setAttribute("style", "display: none");
   highScoresCard.setAttribute("style", "display: flex");
+  renderHighScores();
 })
 
 clearHighScores.addEventListener('click', function(event) {
   event.preventDefault();
   highScoresList.innerHTML = '';
+  localStorage.setItem("highScores", []);
 })
 
 startButton.addEventListener('click', function (event) {
