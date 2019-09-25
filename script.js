@@ -9,6 +9,7 @@ let clock = document.querySelector("#clock");
 let finalScore = document.querySelector("#final-score");
 let highScoreButton = document.querySelector("#high-score");
 let highScores = [];
+let highScoresList = document.querySelector("#high-scores-list");
 let seconds = 75;
 let t = 0; // For stopping the clock
 
@@ -108,7 +109,15 @@ highScoreButton.addEventListener("click", function(event) {
 
   // Save initials and high score.
   localStorage.setItem("highScores", JSON.stringify(highScores));
-
-  // localStorage.setItem("initials", initials);
-  // localStorage.setItem("score", seconds);
+  window.location.href = "highscores.html";
+  console.log(highScores);
+  renderHighScores();
 });
+
+function renderHighScores () {
+  let storedHighScores = JSON.parse(localStorage.getItem("highScores"));
+
+    highScores = storedHighScores;
+  // console.log(highScores);
+  highScoresList.textContent = highScores;
+}
