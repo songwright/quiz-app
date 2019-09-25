@@ -5,12 +5,17 @@ let finalCard = document.querySelector("#final-card");
 let questionTitle = document.querySelector("#title");
 let choiceList = document.querySelector(".list-group");
 let quizMessage = document.querySelector("#quiz-message");
+let clock = document.querySelector("#clock");
+let seconds = 75;
+let t =0; // For clearing the clock
+
 
 startButton.addEventListener('click', function (event) {
   event.preventDefault();
   quizCard.setAttribute("style", "display: flex")
   startCard.setAttribute("style", "display: none")
   renderQuestion();
+  timer();
 });
 
 let questions = [
@@ -35,8 +40,10 @@ function renderQuestion() {
   choiceList.innerHTML = '';
   
   if (questionNum === questions.length ) {
+    // Display All done card
     finalCard.setAttribute("style", "display: flex")
     quizCard.setAttribute("style", "display: none")
+    stopClock();
   } else {
     for (let i = 0; i < questions[questionNum].choices.length; i++) {
       let li = document.createElement("li");
@@ -55,37 +62,30 @@ function renderQuestion() {
           }
       });
     }
-
     questionTitle.textContent = questions[questionNum].title;
   }
 }
 
 function takeScore() {
-  score = score - 10;
-  console.log(score);
+  seconds -= 10;
   // window.open("highscores.html","_self");
 }
 
 // Timer functions based on a timer by Daniel Hug https://jsfiddle.net/Daniel_Hug/pvk6p/
-// function tick() {
-//   seconds +=1;
-//   if (seconds >= 60) { // The hexigesimal number base for seconds converts them to minutes at 60 seconds.
-//       seconds = 0;
-//       minutes +=1;
-//   }
-//   clock.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
-//   timer();
-// }
+function tick() {
+  if (seconds > 0) {
+    seconds -=1;
+    clock.textContent = seconds;
+    timer();
+  } else {
+    stopClock();
+  }
+}
 
-// function timer() {
-//   t = setTimeout(tick, 1000);
-// }
+function timer() {
+  t = setTimeout(tick, 1000);
+}
 
-// function stopClock () {
-//   clearTimeout(t);
-// }
-
-// function clearClock () {
-//   clock.textContent = "00:00";
-//       seconds = 0; minutes = 0;
-// }
+function stopClock () {
+  clearTimeout(t);
+}
