@@ -10,6 +10,7 @@ let clock = document.querySelector("#clock");
 let finalScore = document.querySelector("#final-score");
 let highScoreButton = document.querySelector("#high-score");
 let viewHighScoresButton = document.querySelector("#view-high-scores-btn");
+let clearHighScores = document.querySelector("#clear-high-scores");
 let highScores = [];
 let highScoresList = document.querySelector("#high-scores-list");
 let seconds = 75;
@@ -20,6 +21,11 @@ viewHighScoresButton.addEventListener('click', function(event) {
   quizCard.setAttribute("style", "display: none");
   startCard.setAttribute("style", "display: none");
   highScoresCard.setAttribute("style", "display: flex");
+})
+
+clearHighScores.addEventListener('click', function(event) {
+  event.preventDefault();
+  highScoresList.innerHTML = '';
 })
 
 startButton.addEventListener('click', function (event) {
@@ -45,7 +51,7 @@ let questions = [
   ///etc.
 ];
 
-let score = 0;
+// let score = 0;
 let questionNum = 0;
 
 function renderQuestion() {
