@@ -70,7 +70,7 @@ function renderQuestion() {
     for (let i = 0; i < questions[questionNum].choices.length; i++) {
       let li = document.createElement("li");
       li.textContent = questions[questionNum].choices[i];
-      // li.setAttribute("class", "list-group-item");
+      li.setAttribute("class", "list-group-item");
       choiceList.appendChild(li);
   
       li.addEventListener("click", function(event) {
