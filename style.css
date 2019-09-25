@@ -6,6 +6,10 @@
   
 }
 
+.timer {
+  font-family: 'Courier New', Courier, monospace;
+}
+
 .row {
   padding: 10px 0 10px 0;
 }
