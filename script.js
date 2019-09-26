@@ -15,29 +15,7 @@ let highScores = [];
 let highScoresList = document.querySelector("#high-scores-list");
 let seconds = 75;
 let t = 0; // For stopping the clock
-
-viewHighScoresButton.addEventListener('click', function(event) {
-  event.preventDefault();
-  quizCard.setAttribute("style", "display: none");
-  startCard.setAttribute("style", "display: none");
-  highScoresCard.setAttribute("style", "display: flex");
-  renderHighScores();
-})
-
-clearHighScores.addEventListener('click', function(event) {
-  event.preventDefault();
-  highScoresList.innerHTML = '';
-  localStorage.setItem("highScores", []);
-})
-
-startButton.addEventListener('click', function (event) {
-  event.preventDefault();
-  quizCard.setAttribute("style", "display: flex");
-  startCard.setAttribute("style", "display: none");
-  highScoresCard.setAttribute("style", "display: none");
-  renderQuestion();
-  timer();
-});
+let questionNum = 0;
 
 let questions = [
   {
@@ -67,8 +45,30 @@ let questions = [
   }
 ];
 
-// let score = 0;
-let questionNum = 0;
+viewHighScoresButton.addEventListener('click', function(event) {
+  event.preventDefault();
+  quizCard.setAttribute("style", "display: none");
+  startCard.setAttribute("style", "display: none");
+  highScoresCard.setAttribute("style", "display: flex");
+  renderHighScores();
+})
+
+clearHighScores.addEventListener('click', function(event) {
+  event.preventDefault();
+  highScoresList.innerHTML = '';
+  localStorage.setItem("highScores", []);
+})
+
+startButton.addEventListener('click', function (event) {
+  event.preventDefault();
+  quizCard.setAttribute("style", "display: flex");
+  startCard.setAttribute("style", "display: none");
+  highScoresCard.setAttribute("style", "display: none");
+  renderQuestion();
+  timer();
+});
+
+
 
 function renderQuestion() {
   // Reset the list of multiple choice answers.
