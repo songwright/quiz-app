@@ -11,8 +11,8 @@ let finalScore = document.querySelector("#final-score");
 let highScoreButton = document.querySelector("#high-score");
 let viewHighScoresButton = document.querySelector("#view-high-scores-btn");
 let clearHighScores = document.querySelector("#clear-high-scores");
-let highScores = [];
 let highScoresList = document.querySelector("#high-scores-list");
+let highScores = [];
 let seconds = 75;
 let t = 0; // For stopping the clock
 let questionNum = 0;
@@ -45,6 +45,19 @@ let questions = [
   }
 ];
 
+init();
+
+function init() {
+  // Parsing the JSON stsring to an object
+  let storedHighScores = JSON.parse(localStorage.getItem("highScores"));
+
+  // If high scores were retrieved from localStorage, update highScores array to it.
+  if (storedHighScores !== null) {
+    highScores = storedHighScores;
+  }
+}
+
+
 viewHighScoresButton.addEventListener('click', function(event) {
   event.preventDefault();
   quizCard.setAttribute("style", "display: none");
@@ -56,7 +69,8 @@ viewHighScoresButton.addEventListener('click', function(event) {
 clearHighScores.addEventListener('click', function(event) {
   event.preventDefault();
   highScoresList.innerHTML = '';
-  localStorage.setItem("highScores", []);
+  highScores = [];
+  saveHighScores();
 })
 
 startButton.addEventListener('click', function (event) {
@@ -67,8 +81,6 @@ startButton.addEventListener('click', function (event) {
   renderQuestion();
   timer();
 });
-
-
 
 function renderQuestion() {
   // Reset the list of multiple choice answers.
@@ -127,6 +139,7 @@ function stopClock () {
   clearTimeout(t);
 }
 
+// High score button
 highScoreButton.addEventListener("click", function(event) {
   event.preventDefault();
 
@@ -140,16 +153,27 @@ highScoreButton.addEventListener("click", function(event) {
   // Add high score to array
   highScores.push(highScore);
 
-  // Save initials and high score.
-  localStorage.setItem("highScores", JSON.stringify(highScores));
-  highScoresCard.setAttribute("style", "display: flex")
-  finalCard.setAttribute("style", "display: none")
+  // Show high score card.
+  highScoresCard.setAttribute("style", "display: flex");
+  finalCard.setAttribute("style", "display: none");
+
+  saveHighScores();
   renderHighScores();
 });
 
-function renderHighScores () {
-  let storedHighScores = JSON.parse(localStorage.getItem("highScores"));
+function saveHighScores () {
+  // Save initials and high score.
+  localStorage.setItem("highScores", JSON.stringify(highScores));
+}
 
-    highScores = storedHighScores;
-    highScoresList.textContent = highScores;
+function renderHighScores () {
+  // Clear high scores element before updating.
+  highScoresList.innerHTML = '';
+
+  highScores.forEach(score => {
+    let li = document.createElement("li");
+    li.innerHTML = score;
+
+    highScoresList.appendChild(li);
+  })
 }
