@@ -117,7 +117,11 @@ function renderQuestion() {
 }
 
 function takeScore() {
-  seconds -= 10;
+  if (seconds > 10) {
+    seconds -= 10;
+  } else {
+    seconds = 0;
+  }
 }
 
 // Timer functions based on a timer by Daniel Hug https://jsfiddle.net/Daniel_Hug/pvk6p/
