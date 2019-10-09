@@ -5,3 +5,5 @@ This is a web application that gives the user a quiz on JavaScript. I made this 
 ## Instructions
 
 Click on "Start Quiz." Answer the multiple choice questions before time runs out on the timer. Your score will be based on the time left. Fifteen seconds will be deducted for each wrong answer. The faster you finish the quiz, the higher your score. Record your initials when you get a high score!
+
+https://songwright.github.io/quiz-app/
