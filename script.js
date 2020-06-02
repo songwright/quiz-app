@@ -106,9 +106,11 @@ function renderQuestion() {
             questionNum++;
             quizMessage.innerHTML = "Right!";
             renderQuestion();
-          } else if (choice !== questions[questionNum].answer) {
+          } else if (choice.innerHTML !== questions[questionNum].answer) {
+            questionNum++;
             takeScore();
             quizMessage.innerHTML = "Wrong";
+            renderQuestion();
           }
       });
     }
