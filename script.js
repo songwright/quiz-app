@@ -91,6 +91,7 @@ function renderQuestion() {
     finalCard.setAttribute("style", "display: flex")
     quizCard.setAttribute("style", "display: none")
     stopClock();
+    clock.textContent = seconds;
     finalScore.innerHTML = seconds;
   } else {
     for (let i = 0; i < questions[questionNum].choices.length; i++) {
